@@ -466,3 +466,150 @@ width:120px;
 bottom:20px;
 left:120px;
 }
+/* ---------------- MOBILE RESPONSIVE ---------------- */
+
+@media (max-width: 768px){
+
+nav{
+padding:15px 20px;
+}
+
+nav ul{
+gap:15px;
+font-size:14px;
+}
+
+/* HERO */
+
+.hero{
+flex-direction:column;
+text-align:center;
+padding:120px 20px 40px;
+height:auto;
+}
+
+.hero h1{
+font-size:40px;
+}
+
+.hero-img img{
+width:100%;
+max-width:300px;
+margin-top:30px;
+}
+
+/* PARALLAX */
+
+.parallax-content{
+flex-direction:column;
+text-align:center;
+}
+
+.parallax-images{
+width:100%;
+height:auto;
+position:relative;
+margin-top:40px;
+}
+
+.bottle{
+position:relative;
+left:auto;
+top:auto;
+width:200px;
+margin:auto;
+}
+
+.leaf,
+.flower{
+display:none;
+}
+
+/* SPOTLIGHT */
+
+.spotlight-content{
+flex-direction:column;
+text-align:center;
+}
+
+.spotlight-img img{
+width:100%;
+max-width:320px;
+}
+
+/* BENEFITS */
+
+.benefits{
+flex-direction:column;
+padding:80px 20px;
+}
+
+/* PROBLEM GRID */
+
+.problem-grid{
+grid-template-columns:repeat(2,1fr);
+padding:0 10px;
+}
+
+/* INGREDIENT GRID */
+
+.ingredient-list{
+grid-template-columns:repeat(2,1fr);
+}
+
+/* REELS */
+
+.reel-card img{
+height:320px;
+}
+
+/* PRODUCT */
+
+.product-card{
+width:90%;
+}
+
+/* TESTIMONIAL */
+
+.testimonial{
+width:90%;
+}
+
+/* GALLERY */
+
+.gallery{
+padding:80px 20px;
+}
+
+/* SECTION PADDING FIX */
+
+.problems,
+.ingredients,
+.testimonials,
+.product{
+padding:80px 20px;
+}
+
+}
+
+/* SMALL PHONES */
+
+@media (max-width:480px){
+
+.problem-grid{
+grid-template-columns:1fr;
+}
+
+.ingredient-list{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+nav ul{
+display:none;
+}
+
+}
