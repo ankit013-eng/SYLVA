@@ -449,7 +449,9 @@ max-width:450px;
 }
 /* ---------------- MOBILE RESPONSIVE ---------------- */
 
-@media (max-width: 768px){
+@media (max-width:768px){
+
+/* NAVBAR */
 
 nav{
 padding:15px 20px;
@@ -460,8 +462,7 @@ gap:15px;
 font-size:14px;
 }
 
-
-@media (max-width:768px){
+/* HERO */
 
 .hero{
 padding:90px 20px 40px;
@@ -500,90 +501,8 @@ padding:12px 24px;
 font-size:14px;
 }
 
-}
-/* PARALLAX */
 
-.parallax-content{
-flex-direction:column;
-text-align:center;
-}
-
-.parallax-images{
-width:100%;
-height:auto;
-position:relative;
-margin-top:40px;
-}
-
-/* SPOTLIGHT */
-
-.spotlight-content{
-flex-direction:column;
-text-align:center;
-}
-
-.spotlight-img img{
-width:100%;
-max-width:320px;
-}
-
-/* BENEFITS */
-
-.benefits{
-flex-direction:column;
-padding:80px 20px;
-}
-
-/* PROBLEM GRID */
-
-.problem-grid{
-grid-template-columns:repeat(2,1fr);
-padding:0 10px;
-}
-
-/* INGREDIENT GRID */
-
-.ingredient-list{
-grid-template-columns:repeat(2,1fr);
-}
-
-/* REELS */
-
-.reel-card img{
-height:320px;
-}
-
-/* PRODUCT */
-
-.product-card{
-width:90%;
-}
-
-/* TESTIMONIAL */
-
-.testimonial{
-width:90%;
-}
-
-/* GALLERY */
-
-.gallery{
-padding:80px 20px;
-}
-
-/* SECTION PADDING FIX */
-
-.problems,
-.ingredients,
-.testimonials,
-.product{
-padding:80px 20px;
-}
-
-}
-/* MOBILE FIX */
-
-@media (max-width:768px){
+/* PARALLAX SECTION */
 
 .hero-parallax{
 padding:80px 20px;
@@ -606,12 +525,92 @@ height:160px;
 margin:auto;
 }
 
+.parallax-track{
+gap:20px;
+padding:15px;
+}
+
 .parallax-track img{
 width:80px;
 height:80px;
 }
 
+
+/* SPOTLIGHT */
+
+.spotlight-content{
+flex-direction:column;
+text-align:center;
 }
+
+.spotlight-img img{
+width:100%;
+max-width:320px;
+}
+
+
+/* BENEFITS */
+
+.benefits{
+flex-direction:column;
+padding:80px 20px;
+}
+
+
+/* PROBLEM GRID */
+
+.problem-grid{
+grid-template-columns:repeat(2,1fr);
+padding:0 10px;
+}
+
+
+/* INGREDIENT GRID */
+
+.ingredient-list{
+grid-template-columns:repeat(2,1fr);
+}
+
+
+/* REELS */
+
+.reel-card img{
+height:320px;
+}
+
+
+/* PRODUCT */
+
+.product-card{
+width:90%;
+}
+
+
+/* TESTIMONIAL */
+
+.testimonial{
+width:90%;
+}
+
+
+/* GALLERY */
+
+.gallery{
+padding:80px 20px;
+}
+
+
+/* SECTION PADDING */
+
+.problems,
+.ingredients,
+.testimonials,
+.product{
+padding:80px 20px;
+}
+
+}
+
 
 /* SMALL PHONES */
 
@@ -634,7 +633,6 @@ display:none;
 }
 
 }
-
 .ingredient-belt{
 padding:120px 40px;
 text-align:center;
@@ -748,7 +746,7 @@ background:rgb(238, 182, 182);
 
 .parallax-track{
 display:flex;
-/* gap: 100px; */
+gap: 1px;
 align-items:center;
 height:100%;
 padding:20px;
@@ -773,7 +771,7 @@ transform:translateX(0);
 }
 
 100%{
-transform:translateX(-80%);
+transform:translateX(-100%);
 }
 
 }
