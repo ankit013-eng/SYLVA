@@ -96,62 +96,12 @@ duration:0.6
 
 gsap.registerPlugin(ScrollTrigger)
 
-/* Bottle slow movement */
-
-gsap.to(".bottle",{
-y:-120,
-rotation:3,
-ease:"none",
-scrollTrigger:{
-trigger:".hero-parallax",
-start:"top bottom",
-end:"bottom top",
-scrub:1
-}
+// ---------------- LOADER ---------------- 
+gsap.to(".parallax-track",{
+x:-400,
+duration:12,
+repeat:-1,
+ease:"linear"
 })
 
-/* Leaf 1 floating */
-
-gsap.to(".leaf1",{
-y:-200,
-x:80,
-rotation:20,
-ease:"none",
-scrollTrigger:{
-trigger:".hero-parallax",
-start:"top bottom",
-end:"bottom top",
-scrub:1
-}
-})
-
-/* Leaf 2 opposite direction */
-
-gsap.to(".leaf2",{
-y:180,
-x:-80,
-rotation:-20,
-ease:"none",
-scrollTrigger:{
-trigger:".hero-parallax",
-start:"top bottom",
-end:"bottom top",
-scrub:1
-}
-})
-
-/* Flower movement */
-
-gsap.to(".flower",{
-y:-150,
-x:40,
-rotation:10,
-ease:"none",
-scrollTrigger:{
-trigger:".hero-parallax",
-start:"top bottom",
-end:"bottom top",
-scrub:1
-}
-})
 
