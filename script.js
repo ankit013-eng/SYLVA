@@ -104,10 +104,12 @@ repeat:-1,
 ease:"linear"
 })
 
-setTimeout(function(){
-document.getElementById("offerPopup").classList.add("show");
-},3000);
 
-function closePopup(){
-document.getElementById("offerPopup").classList.remove("show");
+
+setTimeout(function(){
+document.getElementById("luxPopup").classList.add("show");
+},3000)
+
+function closeLux(){
+document.getElementById("luxPopup").classList.remove("show")
 }
