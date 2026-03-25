@@ -432,16 +432,18 @@ background:#1c261c;
 color:white;
 }
 
-#loader{
-position:fixed;
-width:100%;
-height:100%;
-background:#f7f3ea;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:999;
-font-size:40px;
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f7f3ea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  font-size: 40px;
 }
 #progress{
 position:fixed;

@@ -1,16 +1,20 @@
 gsap.registerPlugin(ScrollTrigger)
 
-window.addEventListener("load",()=>{
+window.addEventListener("DOMContentLoaded", () => {
+  gsap.to("#loader", {
+    opacity: 0,
+    duration: 0.8,
+    delay: 0.5,
+    onComplete: () => {
+      document.getElementById("loader").style.display = "none";
+    }
+  });
+});
 
-gsap.to("#loader",{
-opacity:0,
-duration:0.8,
-delay:0.5,
-onComplete:()=>document.getElementById("loader").style.display="none"
-})
-
-})
-
+setTimeout(() => {
+  const loader = document.getElementById("loader");
+  if (loader) loader.style.display = "none";
+}, 4000);
 gsap.from(".hero h1",{
 y:80,
 opacity:0,
