@@ -932,13 +932,13 @@ background:rgb(238, 182, 182);
 
 /* moving track */
 
-.parallax-track{
-display:flex;
-gap: 1px;
-align-items:center;
-height:100%;
-padding:20px;
-animation:ingredientScroll 20s linear infinite;
+.parallax-track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0; /* remove extra spacing */
+  gap: 0; /* no gap between images */
+  animation: ingredientScroll 20s linear infinite;
 }
 
 /* ingredient images */
