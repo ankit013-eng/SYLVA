@@ -57,8 +57,13 @@ duration:0.5
 
 document.querySelectorAll(".faq-question").forEach(btn=>{
 btn.addEventListener("click",()=>{
-let ans=btn.nextElementSibling
-ans.style.display=ans.style.display==="block"?"none":"block"
+let ans = btn.nextElementSibling
+
+if(ans.style.maxHeight){
+ans.style.maxHeight = null
+} else {
+ans.style.maxHeight = ans.scrollHeight + "px"
+}
 })
 })
 

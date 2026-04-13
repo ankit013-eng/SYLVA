@@ -413,9 +413,9 @@ cursor:pointer;
 }
 
 .faq-answer{
-display:none;
-padding:20px;
-background:white;
+max-height:0;
+overflow:hidden;
+transition:0.3s ease;
 }
 
 .cta-final{
@@ -609,10 +609,13 @@ nav{
 padding:15px 20px;
 }
 
+
 nav ul{
-gap:15px;
-font-size:14px;
+display:flex;
+gap:10px;
+font-size:12px;
 }
+
 
 /* HERO */
 
@@ -1123,6 +1126,22 @@ margin-top:20px;
 .trust-item{
 font-size:13px;
 padding:10px;
+
+
+}
+@media (max-width:768px){
+
+.faq{
+padding:60px 15px;
+}
+
+.faq-question{
+font-size:14px;
+padding:14px;
+}
+
+.faq-answer{
+font-size:13px;
 }
 
 }
