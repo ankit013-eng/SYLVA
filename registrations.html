@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYLVA Registrations</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">SYLVA</a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="index.html#story">Story</a>
+      <a href="about.html">About</a>
+      <a href="index.html#ingredients">Ingredients</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#product">Product</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__content">
+        <div>
+          <p class="eyebrow">Registration dashboard</p>
+          <h1>All registration requests in one place.</h1>
+          <p class="hero__description">This page shows the registrations received from your site. Entries are stored locally in this browser so you can review them instantly.</p>
+          <a class="btn btn--primary" href="index.html#registration">Back to registration offer</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="registration-dashboard-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Saved entries</p>
+        <h2>Recent registrations</h2>
+      </div>
+      <div class="registration-list-wrapper reveal">
+        <div class="registration-list" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const container = document.querySelector('.registration-list');
+      if (!container) return;
+
+      try {
+        const entries = JSON.parse(localStorage.getItem('sylvaRegistrations') || '[]');
+
+        if (!entries.length) {
+          container.innerHTML = '<p class="empty-state">No registrations yet. Submit the form to see entries here.</p>';
+          return;
+        }
+
+        container.innerHTML = entries.map((entry) => `
+          <article class="registration-entry">
+            <h3>${entry.name || 'Unknown'}</h3>
+            <p><strong>Phone:</strong> ${entry.phone || '-'}</p>
+            <p><strong>Email:</strong> ${entry.email || '-'}</p>
+            <p><strong>Submitted:</strong> ${entry.time || 'Just now'}</p>
+          </article>
+        `).join('');
+      } catch (error) {
+        container.innerHTML = '<p class="empty-state">Unable to load registrations right now.</p>';
+      }
+    })();
+  </script>
+</body>
+</html>

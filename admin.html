@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYLVA Admin Records</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">SYLVA</a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="registrations.html">View registrations</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__content">
+        <div>
+          <p class="eyebrow">Private admin area</p>
+          <h1>Registered customer records</h1>
+          <p class="hero__description">This page is dedicated to you so you can review all registrations collected from the site.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="registration-dashboard-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Saved records</p>
+        <h2>All registrations</h2>
+      </div>
+      <div class="registration-list-wrapper reveal">
+        <div class="registration-list" id="adminRecords" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const container = document.getElementById('adminRecords');
+      if (!container) return;
+
+      try {
+        const stored = localStorage.getItem('sylvaRegistrations');
+        const entries = stored ? JSON.parse(stored) : [];
+
+        if (!entries.length) {
+          container.innerHTML = '<p class="empty-state">No registrations have been saved yet.</p>';
+          return;
+        }
+
+        container.innerHTML = entries.map((entry, index) => `
+          <article class="registration-entry">
+            <h3>#${index + 1} — ${entry.name || 'Unknown'}</h3>
+            <p><strong>Phone:</strong> ${entry.phone || '-'}</p>
+            <p><strong>Email:</strong> ${entry.email || '-'}</p>
+            <p><strong>Submitted:</strong> ${entry.time || 'Just now'}</p>
+          </article>
+        `).join('');
+      } catch (error) {
+        container.innerHTML = '<p class="empty-state">Unable to load records right now.</p>';
+      }
+    })();
+  </script>
+</body>
+</html>
