@@ -307,16 +307,29 @@ section { padding: 5.5rem 2rem; max-width: 1200px; margin: 0 auto; }
 .product-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
 .registration-section { padding-top: 1.5rem; }
-.registration-card {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 1.5rem;
-  align-items: center;
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, rgba(79, 109, 69, 0.12), rgba(255, 255, 255, 0.92));
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+@media (max-width: 768px) {
+  /* Enforce a strict 1-column grid and prevent width overflow */
+  .registration-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 1.5rem 1rem;
+    gap: 15px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* Ensure inputs/buttons inside the registration don't push the screen wider */
+  .registration-card input,
+  .registration-card select,
+  .registration-card textarea,
+  .registration-card button {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 .registration-copy h2 {
   font-family: 'Playfair Display', serif;
@@ -436,19 +449,7 @@ section { padding: 5.5rem 2rem; max-width: 1200px; margin: 0 auto; }
 .site-footer h3 { font-size: 1rem; margin-bottom: 0.8rem; }
 .site-footer a { display: block; margin-bottom: 0.4rem; color: var(--text-muted); }
 
-.back-to-top {
-  position: fixed;
-  right: 1.2rem;
-  bottom: 5.5rem;
-  width: 46px;
-  height: 46px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--accent);
-  color: white;
-  display: none;
-  z-index: 700;
-}
+
 .whatsapp-float {
   position: fixed;
   right: 1.2rem;
