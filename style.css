@@ -21,6 +21,7 @@ body {
   color: var(--text);
   background: linear-gradient(180deg, var(--bg), #f4ebdf 60%, #f8f2e8 100%);
   line-height: 1.65;
+  overflow-x: hidden;
 }
 img { display: block; width: 100%; object-fit: cover; }
 a { color: inherit; text-decoration: none; }
@@ -497,7 +498,11 @@ section { padding: 5.5rem 2rem; max-width: 1200px; margin: 0 auto; }
 }
 
 @media (max-width: 760px) {
-  .site-header { padding: 1rem 1rem; }
+  .site-header {
+    padding: 1rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
   .menu-toggle { display: block; }
   .site-nav {
     position: absolute;
@@ -512,18 +517,24 @@ section { padding: 5.5rem 2rem; max-width: 1200px; margin: 0 auto; }
     border: 1px solid var(--border);
     border-radius: 16px;
     box-shadow: var(--shadow);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
   }
   .site-nav.open { display: flex; }
   .hero__content, .story-grid, .feature-grid, .problem-grid, .ingredient-grid, .video-grid, .routine-grid, .highlights, .site-footer, .newsletter-section { grid-template-columns: 1fr; display: grid; }
   section { padding: 4rem 1rem; }
-  .hero__content { padding: 1.4rem; }
+  .hero__content { padding: 1.25rem; gap: 1.25rem; }
+  .hero h1 { font-size: 2rem; }
   .hero__media img { min-height: 280px; }
   .newsletter-section { align-items: flex-start; }
   .newsletter-form { width: 100%; }
   .newsletter-form input { min-width: 0; width: 100%; }
-  .registration-card { grid-template-columns: 1fr; }
+  .registration-card { grid-template-columns: 1fr; padding: 1.25rem; }
+  .product-actions { flex-direction: column; align-items: stretch; }
   .testimonial-carousel { flex-direction: column; }
   .timeline { grid-template-columns: 1fr; }
+  .lux-box { max-width: min(92vw, 460px); padding: 1.4rem; }
+  .back-to-top, .whatsapp-float { right: 1rem; }
 }
 
 

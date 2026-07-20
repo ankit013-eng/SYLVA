@@ -1,5 +1,5 @@
 const loader = document.getElementById('loader');
-const progressBar = document.getElementById('progress');
+let progressBar = document.getElementById('progress');
 const menuToggle = document.querySelector('.menu-toggle');
 const siteNav = document.querySelector('.site-nav');
 const faqButtons = document.querySelectorAll('.faq-question');
@@ -79,6 +79,46 @@ const saveRegistration = async (entry) => {
   return nextEntries;
 };
 
+const ensureProgressBar = () => {
+  if (progressBar) return progressBar;
+
+  const existing = document.getElementById('progress');
+  if (existing) {
+    progressBar = existing;
+    return progressBar;
+  }
+
+  const bar = document.createElement('div');
+  bar.id = 'progress';
+  bar.className = 'scroll-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.prepend(bar);
+  progressBar = bar;
+  return progressBar;
+};
+
+const showRegistrationPopup = (name) => {
+  const popup = document.getElementById('luxPopup');
+  if (!popup) return;
+
+  const title = popup.querySelector('.lux-popup-title');
+  const message = popup.querySelector('.lux-popup-message');
+  const subtitle = popup.querySelector('.lux-popup-subtitle');
+
+  if (title) {
+    title.textContent = 'Registration confirmed';
+  }
+  if (message) {
+    message.textContent = `Thank you, ${name}! Your registration has been saved successfully.`;
+  }
+  if (subtitle) {
+    subtitle.textContent = 'We will contact you soon with the next steps.';
+  }
+
+  popup.classList.add('show');
+  popup.setAttribute('aria-hidden', 'false');
+};
+
 const renderRegistrations = () => {
   if (!registrationList) return;
 
@@ -147,6 +187,8 @@ const initAnimations = () => {
 };
 
 window.addEventListener('DOMContentLoaded', () => {
+  ensureProgressBar();
+
   if (loader) {
     if (typeof window.gsap !== 'undefined' && typeof window.gsap.to === 'function') {
       window.gsap.to(loader, {
@@ -251,15 +293,10 @@ window.addEventListener('DOMContentLoaded', () => {
       };
 
       await saveRegistration(entry);
-      registrationMessage.textContent = `Thank you ${name}! Your registration is confirmed for the ₹99 launch offer.`;
+      registrationMessage.textContent = `Thank you ${name}! Your registration is confirmed.`;
       registrationForm.reset();
       renderRegistrations();
-
-      const popup = document.getElementById('luxPopup');
-      if (popup) {
-        popup.classList.add('show');
-        popup.setAttribute('aria-hidden', 'false');
-      }
+      showRegistrationPopup(name);
     });
   }
 
@@ -283,14 +320,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
-
-  setTimeout(() => {
-    const popup = document.getElementById('luxPopup');
-    if (popup) {
-      popup.classList.add('show');
-      popup.setAttribute('aria-hidden', 'false');
-    }
-  }, 3000);
 });
 
 function closeLux() {
