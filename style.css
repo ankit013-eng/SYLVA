@@ -169,19 +169,6 @@ section { padding: 5.5rem 2rem; max-width: 1200px; margin: 0 auto; }
 }
 .hero__media { position: relative; }
 .hero__media img { border-radius: 30px; min-height: 420px; box-shadow: var(--shadow); }
-.hero__floating-card {
-  position: absolute;
-  right: -1rem;
-  bottom: -1rem;
-  background: var(--surface-strong);
-  padding: 1rem 1.2rem;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  max-width: 220px;
-}
-.hero__floating-card strong { display: block; font-size: 0.95rem; margin-bottom: 0.3rem; }
-.hero__floating-card span { font-size: 0.9rem; color: var(--text-muted); }
-
 .highlights {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -475,6 +462,7 @@ section { padding: 5.5rem 2rem; max-width: 1200px; margin: 0 auto; }
   font-size: 1.5rem;
   z-index: 700;
   box-shadow: 0 14px 32px rgba(37, 211, 102, 0.35);
+  cursor: default;
 }
 .lux-popup {
   position: fixed;

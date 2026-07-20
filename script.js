@@ -18,21 +18,72 @@ const registrationMessage = document.querySelector('.registration-message');
 const registrationList = document.querySelector('.registration-list');
 const revealItems = Array.from(document.querySelectorAll('.reveal'));
 
-const saveRegistration = (entry) => {
-  try {
-    const existing = JSON.parse(localStorage.getItem('sylvaRegistrations') || '[]');
-    existing.unshift(entry);
-    localStorage.setItem('sylvaRegistrations', JSON.stringify(existing.slice(0, 100)));
-  } catch (error) {
-    console.error('Unable to save registration', error);
+const STORAGE_KEY = 'sylvaRegistrations';
+
+const getRegistrationApiBase = () => {
+  const params = new URLSearchParams(window.location.search);
+  const override = params.get('api') || window.SYLVA_REGISTRATION_API;
+  if (override) return override.replace(/\/$/, '');
+
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1' || host === '::1') {
+    return 'http://127.0.0.1:3000';
   }
+
+  return 'http://127.0.0.1:3000';
+};
+
+const registrationApiUrl = `${getRegistrationApiBase()}/registrations`;
+
+const readStoredEntries = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    return [];
+  }
+};
+
+const persistEntries = (entries) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries.slice(0, 100)));
+  } catch (error) {
+    console.error('Unable to save registration locally', error);
+  }
+};
+
+const saveRegistration = async (entry) => {
+  const existing = readStoredEntries();
+  const nextEntries = [entry, ...existing].slice(0, 100);
+  persistEntries(nextEntries);
+
+  try {
+    const response = await fetch(registrationApiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry)
+    });
+
+    if (response.ok) {
+      const payload = await response.json();
+      if (Array.isArray(payload.entries)) {
+        persistEntries(payload.entries);
+      }
+    }
+  } catch (error) {
+    console.warn('Shared registration endpoint unavailable, using local storage only.', error);
+  }
+
+  return nextEntries;
 };
 
 const renderRegistrations = () => {
   if (!registrationList) return;
 
   try {
-    const entries = JSON.parse(localStorage.getItem('sylvaRegistrations') || '[]');
+    const entries = readStoredEntries();
 
     if (!entries.length) {
       registrationList.innerHTML = '<p class="empty-state">No registrations yet. Submit the form to see entries here.</p>';
@@ -181,7 +232,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   if (registrationForm) {
-    registrationForm.addEventListener('submit', (event) => {
+    registrationForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       const name = registrationForm.querySelector('#reg-name').value.trim();
       const phone = registrationForm.querySelector('#reg-phone').value.trim();
@@ -199,7 +250,7 @@ window.addEventListener('DOMContentLoaded', () => {
         time: new Date().toLocaleString()
       };
 
-      saveRegistration(entry);
+      await saveRegistration(entry);
       registrationMessage.textContent = `Thank you ${name}! Your registration is confirmed for the ₹99 launch offer.`;
       registrationForm.reset();
       renderRegistrations();

@@ -42,14 +42,20 @@
   </main>
 
   <script>
-    (function () {
+    (async function () {
       const container = document.getElementById('adminRecords');
       if (!container) return;
 
-      try {
-        const stored = localStorage.getItem('sylvaRegistrations');
-        const entries = stored ? JSON.parse(stored) : [];
+      const getRegistrationApiBase = () => {
+        const params = new URLSearchParams(window.location.search);
+        const override = params.get('api') || window.SYLVA_REGISTRATION_API;
+        if (override) return override.replace(/\/$/, '');
+        return 'http://127.0.0.1:3000';
+      };
 
+      const registrationApiUrl = `${getRegistrationApiBase()}/registrations`;
+
+      const renderEntries = (entries) => {
         if (!entries.length) {
           container.innerHTML = '<p class="empty-state">No registrations have been saved yet.</p>';
           return;
@@ -63,6 +69,21 @@
             <p><strong>Submitted:</strong> ${entry.time || 'Just now'}</p>
           </article>
         `).join('');
+      };
+
+      try {
+        const stored = localStorage.getItem('sylvaRegistrations');
+        const localEntries = stored ? JSON.parse(stored) : [];
+        renderEntries(localEntries);
+
+        const response = await fetch(registrationApiUrl);
+        if (response.ok) {
+          const payload = await response.json();
+          if (Array.isArray(payload.entries)) {
+            localStorage.setItem('sylvaRegistrations', JSON.stringify(payload.entries));
+            renderEntries(payload.entries);
+          }
+        }
       } catch (error) {
         container.innerHTML = '<p class="empty-state">Unable to load records right now.</p>';
       }
