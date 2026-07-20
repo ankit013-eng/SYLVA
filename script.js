@@ -254,6 +254,12 @@ window.addEventListener('DOMContentLoaded', () => {
       registrationMessage.textContent = `Thank you ${name}! Your registration is confirmed for the ₹99 launch offer.`;
       registrationForm.reset();
       renderRegistrations();
+
+      const popup = document.getElementById('luxPopup');
+      if (popup) {
+        popup.classList.add('show');
+        popup.setAttribute('aria-hidden', 'false');
+      }
     });
   }
 
